@@ -1,0 +1,294 @@
+<Application x:Class="ImproveCaptionButtonFA.App"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sty="using:FluentAvalonia.Styling"
+             xmlns:sys="using:System"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
+             x:CompileBindings="True">
+    <Design.PreviewWith>
+        <Border>
+            <Button Classes="FASystemCaption" Content="&#xE921;" />
+        </Border>
+    </Design.PreviewWith>
+    <Application.Styles>
+        <FluentTheme Mode="Light" />
+        <sty:FluentAvaloniaTheme RequestedTheme="Light" />
+        <Style Selector="Button.FASystemCaption">
+            <Setter Property="Background" Value="{DynamicResource MenuBarItemBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MenuBarItemBorderBrush}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource MenuBarItemBorderThickness}" />
+            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+            <!--  Narrow padding should be used for mouse input, when non-narrow one should be used for touch input in future.  -->
+            <Setter Property="Padding" Value="{DynamicResource MenuFlyoutItemThemePaddingNarrow}" />
+            <Setter Property="Margin" Value="{DynamicResource MenuBarItemMargin}" />
+            <Setter Property="Padding" Value="{DynamicResource MenuBarItemButtonPadding}" />
+            <Setter Property="Padding" Value="12,4" />
+
+            <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
+            <!--<Setter Property="FontSize" Value="14" />-->
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <!--<Setter Property="Background" Value="{DynamicResource FATitle_SysCaptionBackground}" />-->
+            <!--<Setter Property="BorderBrush" Value="{x:Null}" />-->
+            <!--<Setter Property="BorderThickness" Value="0" />-->
+            <!--<Setter Property="Width" Value="46" />-->
+            <!--<Setter Property="Foreground" Value="{DynamicResource FATitle_SysCaptionForeground}" />
+            -->
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="PART_LayoutRoot"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <ContentPresenter Name="PART_HeaderPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Center"
+                                          Content="{TemplateBinding Content}">
+                            <ContentPresenter.DataTemplates>
+                                <DataTemplate DataType="sys:String">
+                                    <AccessText Text="{Binding}" />
+                                </DataTemplate>
+                            </ContentPresenter.DataTemplates>
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+
+            <Style Selector="^:pointerover">
+                <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
+                </Style>
+                <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+                    <Setter Property="Foreground" Value="{DynamicResource MenuFlyoutItemForegroundPointerOver}" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:pressed">
+                <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPressed}" />
+                </Style>
+                <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
+                    <Setter Property="Foreground" Value="{DynamicResource MenuFlyoutItemForegroundPressed}" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:disabled /template/ Border">
+                <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundDisabled}" />
+                </Style>
+                <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+                    <Setter Property="Foreground" Value="{DynamicResource MenuFlyoutItemForegroundDisabled}" />
+                </Style>
+            </Style>
+
+            <!--  Minimize Button  -->
+            <Style Selector="^.Minimize">
+
+                <Style Selector="^:pointerover">
+                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                        <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
+                    </Style>
+                    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                    </Style>
+                </Style>
+
+                <Style Selector="^:pressed">
+                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
+                    </Style>
+                    <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                    </Style>
+                </Style>
+
+            </Style>
+
+            <!--  MaxRestore Button  -->
+            <Style Selector="^.MaxRestore">
+
+                <Style Selector="^:pointerover">
+                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                        <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
+                    </Style>
+                    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                    </Style>
+                </Style>
+
+                <Style Selector="^:pressed">
+                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                        <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
+                    </Style>
+                    <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                    </Style>
+                </Style>
+
+            </Style>
+
+            <!--  Close Button  -->
+            <Style Selector="^.Close">
+
+                <Style Selector="^:pointerover">
+                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                        <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
+                    </Style>
+                    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                    </Style>
+                </Style>
+
+                <Style Selector="^:pressed">
+                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
+                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
+                    </Style>
+                    <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                    </Style>
+                </Style>
+
+            </Style>
+        </Style>
+
+        <Style Selector="uip|MinMaxCloseControl">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="MinimizeButton"
+                                Classes="FASystemCaption Minimize"
+                                Content="&#xE921;" />
+                        <Button Name="MaxRestoreButton"
+                                Classes="FASystemCaption MaxRestore"
+                                Content="&#xE15B;" />
+                        <Button Name="CloseButton"
+                                Classes="FASystemCaption Close"
+                                Content="&#xE8BB;" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter>
+
+            <Style Selector="^:maximized">
+                <Style Selector="^ /template/ Button#MaxRestoreButton">
+                    <Setter Property="Content" Value="&#xE923;" />
+                    <!--  Icon seems a little too small, so we'll up the font size here to make it look more correct  -->
+                    <Setter Property="FontSize" Value="16" />
+                </Style>
+            </Style>
+        </Style>
+
+        <Style Selector="ui|CoreWindow">
+            <Setter Property="Background" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}" />
+            <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+            <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <VisualLayerManager>
+                        <!--  Because we use the System Border, we don't specify anything like that here.  -->
+                        <Border Name="RootBorder"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}">
+                            <Panel>
+                                <Panel Name="DefaultTitleBar"
+                                       VerticalAlignment="Top"
+                                       Background="{DynamicResource FATitle_TitleBarBackground}">
+                                    <TextBlock Name="TitleText"
+                                               Margin="12,0,0,0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               FontSize="12"
+                                               Foreground="{DynamicResource FATitle_TitleBarForeground}"
+                                               Text="{TemplateBinding Title}" />
+                                </Panel>
+
+                                <ContentPresenter Name="PART_ContentPresenter"
+                                                  Margin="0,0,0,0"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  ClipToBounds="False"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+                                <!--  Add the Caption Buttons, these should ALWAYS overlay the window  -->
+                                <uip:MinMaxCloseControl Name="SystemCaptionButtons"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Top" />
+
+                            </Panel>
+                        </Border>
+                    </VisualLayerManager>
+                </ControlTemplate>
+            </Setter>
+
+            <Style Selector="^[IsActive=False]">
+                <Style Selector="^ /template/ Panel#DefaultTitleBar">
+                    <Setter Property="Background" Value="{DynamicResource FATitle_TitleBarBackgroundInactive}" />
+                </Style>
+                <Style Selector="^ /template/ TextBlock#TitleText">
+                    <Setter Property="Foreground" Value="{DynamicResource FATitle_TitleBarForegroundInactive}" />
+                </Style>
+
+                <Style Selector="^ Button.SystemCaption /template/ Border">
+                    <Setter Property="Background" Value="{DynamicResource FATitle_SysCaptionBackgroundInactive}" />
+                </Style>
+                <Style Selector="^ Button.SystemCaption /template/ TextBlock">
+                    <Setter Property="Foreground" Value="{DynamicResource FATitle_SysCaptionForegroundInactive}" />
+                </Style>
+
+                <Style Selector="^:windows10">
+                    <Style Selector="^ /template/ Border#RootBorder">
+                        <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultSolid}" />
+                        <Setter Property="BorderThickness" Value="0 0.5 0 0" />
+                    </Style>
+                </Style>
+            </Style>
+
+            <Style Selector="^[CanResize=False]">
+                <Style Selector="^ uip|MinMaxCloseControl /template/ Button#MaxRestoreButton">
+                    <Setter Property="IsEnabled" Value="False" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:dialog">
+                <Style Selector="^ uip|MinMaxCloseControl /template/ Button#MaxRestoreButton">
+                    <Setter Property="IsVisible" Value="False" />
+                </Style>
+                <Style Selector="^ uip|MinMaxCloseControl /template/ Button#MinimizeButton">
+                    <Setter Property="IsVisible" Value="False" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:windows10 /template/ Border#RootBorder">
+                <!--  This will show if custom accent color setting is used in Settings page  -->
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+                <Setter Property="BorderThickness" Value="0 0.5 0 0" />
+            </Style>
+
+            <Style Selector="^[WindowState=Maximized]:windows10 /template/ Border#RootBorder">
+                <Setter Property="BorderThickness" Value="0 0 0 0" />
+            </Style>
+
+            <Style Selector="^:extended /template/ TextBlock#TitleText">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+            <Style Selector="^:extended:customtitlebar /template/ Panel#DefaultTitleBar">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Width" Value="10" />
+            </Style>
+
+            <!--<Style Selector="^:splashScreen">
+
+        </Style>-->
+        </Style>
+
+
+
+    </Application.Styles>
+    <Application.Resources />
+</Application>
