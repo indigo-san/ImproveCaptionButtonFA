@@ -1,9 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 using FluentAvalonia.Core.ApplicationModel;
+using FluentAvalonia.Styling;
 using FluentAvalonia.UI.Controls;
 using FluentAvalonia.UI.Controls.Primitives;
 
@@ -13,12 +15,28 @@ namespace ImproveCaptionButtonFA
 {
     public partial class MainWindow : CoreWindow
     {
+        private readonly FluentAvaloniaTheme _theme;
+
         public MainWindow()
         {
             InitializeComponent();
+            _theme = AvaloniaLocator.Current.GetRequiredService<FluentAvaloniaTheme>();
+            _theme.RequestedTheme = FluentAvaloniaTheme.LightModeString;
 #if DEBUG
             this.AttachDevTools();
 #endif
+        }
+
+        private void OnThemeToggleClick(object? sender, RoutedEventArgs e)
+        {
+            if (ThemeToggle.IsChecked == true)
+            {
+                _theme.RequestedTheme = FluentAvaloniaTheme.DarkModeString;
+            }
+            else
+            {
+                _theme.RequestedTheme = FluentAvaloniaTheme.LightModeString;
+            }
         }
 
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

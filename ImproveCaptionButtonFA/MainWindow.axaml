@@ -20,5 +20,13 @@
                 <MenuItem Header="Help" />
             </Menu>
         </Grid>
+
+        <ToggleSwitch x:Name="ThemeToggle"
+                      Grid.Row="1"
+                      HorizontalAlignment="Center"
+                      Click="OnThemeToggleClick"
+                      Content="Theme"
+                      OffContent="Light"
+                      OnContent="Dark" />
     </Grid>
 </ui:CoreWindow>

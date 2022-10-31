@@ -6,19 +6,46 @@
              xmlns:ui="using:FluentAvalonia.UI.Controls"
              xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
              x:CompileBindings="True">
-    <Design.PreviewWith>
-        <Border>
-            <Button Classes="FASystemCaption" Content="&#xE921;" />
-        </Border>
-    </Design.PreviewWith>
+    <Application.Resources>
+        <SolidColorBrush x:Key="MinimizeButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
+        <SolidColorBrush x:Key="MinimizeButtonForegroundPointerOver" Color="{DynamicResource SystemFillColorCaution}" />
+        <SolidColorBrush x:Key="MinimizeButtonBackgroundPressed" Color="{DynamicResource SystemFillColorCautionBackground}" />
+        <SolidColorBrush x:Key="MinimizeButtonForegroundPressed" Color="{DynamicResource SystemFillColorCaution}" />
+        <SolidColorBrush x:Key="MinimizeButtonBackgroundDisabled" Color="{DynamicResource SubtleFillColorTransparent}" />
+        <SolidColorBrush x:Key="MinimizeButtonForegroundDisabled" Color="{DynamicResource TextFillColorDisabled}" />
+
+        <SolidColorBrush x:Key="MaxRestoreButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
+        <SolidColorBrush x:Key="MaxRestoreButtonForegroundPointerOver" Color="{DynamicResource SystemFillColorSuccess}" />
+        <SolidColorBrush x:Key="MaxRestoreButtonBackgroundPressed" Color="{DynamicResource SystemFillColorSuccessBackground}" />
+        <SolidColorBrush x:Key="MaxRestoreButtonForegroundPressed" Color="{DynamicResource SystemFillColorSuccess}" />
+        <SolidColorBrush x:Key="MaxRestoreButtonBackgroundDisabled" Color="{DynamicResource SubtleFillColorTransparent}" />
+        <SolidColorBrush x:Key="MaxRestoreButtonForegroundDisabled" Color="{DynamicResource TextFillColorDisabled}" />
+
+        <SolidColorBrush x:Key="CloseButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
+        <SolidColorBrush x:Key="CloseButtonForegroundPointerOver" Color="{DynamicResource SystemFillColorCritical}" />
+        <SolidColorBrush x:Key="CloseButtonBackgroundPressed" Color="{DynamicResource SystemFillColorCriticalBackground}" />
+        <SolidColorBrush x:Key="CloseButtonForegroundPressed" Color="{DynamicResource SystemFillColorCritical}" />
+        <SolidColorBrush x:Key="CloseButtonBackgroundDisabled" Color="{DynamicResource SubtleFillColorTransparent}" />
+        <SolidColorBrush x:Key="CloseButtonForegroundDisabled" Color="{DynamicResource TextFillColorDisabled}" />
+
+        <SolidColorBrush x:Key="CaptionButtonBackground" Color="{DynamicResource SubtleFillColorTransparent}" />
+        <SolidColorBrush x:Key="CaptionButtonBorderBrush" Color="{DynamicResource ControlAltFillColorTertiary}" />
+        <Thickness x:Key="CaptionButtonBorderThickness">0</Thickness>
+        <SolidColorBrush x:Key="CaptionButtonBackgroundPointerOver" Color="{DynamicResource SubtleFillColorSecondary}" />
+        <SolidColorBrush x:Key="CaptionButtonForegroundPointerOver" Color="{DynamicResource TextFillColorPrimary}" />
+        <SolidColorBrush x:Key="CaptionButtonBackgroundPressed" Color="{DynamicResource SubtleFillColorTertiary}" />
+        <SolidColorBrush x:Key="CaptionButtonForegroundPressed" Color="{DynamicResource TextFillColorPrimary}" />
+        <SolidColorBrush x:Key="CaptionButtonBackgroundDisabled" Color="{DynamicResource SubtleFillColorTransparent}" />
+        <SolidColorBrush x:Key="CaptionButtonForegroundDisabled" Color="{DynamicResource TextFillColorDisabled}" />
+    </Application.Resources>
     <Application.Styles>
         <FluentTheme Mode="Light" />
         <sty:FluentAvaloniaTheme RequestedTheme="Light" />
 
         <Style Selector="Button.FASystemCaption">
-            <Setter Property="Background" Value="{DynamicResource MenuBarItemBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource MenuBarItemBorderBrush}" />
-            <Setter Property="BorderThickness" Value="{DynamicResource MenuBarItemBorderThickness}" />
+            <Setter Property="Background" Value="{DynamicResource CaptionButtonBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource CaptionButtonBorderBrush}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource CaptionButtonBorderThickness}" />
             <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
             <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
             <Setter Property="Padding" Value="14,4" />
@@ -28,110 +55,95 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Border Name="PART_LayoutRoot"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                        <ContentPresenter Name="PART_HeaderPresenter"
-                                          Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Center"
-                                          Content="{TemplateBinding Content}">
-                            <ContentPresenter.DataTemplates>
-                                <DataTemplate DataType="sys:String">
-                                    <AccessText Text="{Binding}" />
-                                </DataTemplate>
-                            </ContentPresenter.DataTemplates>
-                        </ContentPresenter>
-                    </Border>
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Padding="{TemplateBinding Padding}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Background="{TemplateBinding Background}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      RecognizesAccessKey="True" />
                 </ControlTemplate>
             </Setter>
 
-            <Style Selector="^:pointerover">
-                <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
-                </Style>
-                <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                    <Setter Property="Foreground" Value="{DynamicResource MenuFlyoutItemForegroundPointerOver}" />
-                </Style>
+            <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Transitions">
+                    <Transitions>
+                        <!--<BrushTransition Property="Background" Duration="00:00:00.083" />-->
+                        <BrushTransition Property="Foreground" Duration="00:00:00.083" />
+                    </Transitions>
+                </Setter>
             </Style>
 
-            <Style Selector="^:pressed">
-                <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPressed}" />
-                </Style>
-                <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
-                    <Setter Property="Foreground" Value="{DynamicResource MenuFlyoutItemForegroundPressed}" />
-                </Style>
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource CaptionButtonBackgroundPointerOver}" />
+                <Setter Property="Foreground" Value="{DynamicResource CaptionButtonForegroundPointerOver}" />
             </Style>
 
-            <Style Selector="^:disabled /template/ Border">
-                <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundDisabled}" />
-                </Style>
-                <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                    <Setter Property="Foreground" Value="{DynamicResource MenuFlyoutItemForegroundDisabled}" />
-                </Style>
+            <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource CaptionButtonBackgroundPressed}" />
+                <Setter Property="Foreground" Value="{DynamicResource CaptionButtonForegroundPressed}" />
+            </Style>
+
+            <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource CaptionButtonBackgroundDisabled}" />
+                <Setter Property="Foreground" Value="{DynamicResource CaptionButtonForegroundDisabled}" />
             </Style>
 
             <!--  Minimize Button  -->
-            <Style Selector="^.Minimize">
-                <Style Selector="^:pointerover">
-                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                        <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
-                    </Style>
-                    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
-                    </Style>
+            <Style Selector="^.minimize">
+                <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource MinimizeButtonBackgroundPointerOver}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MinimizeButtonForegroundPointerOver}" />
                 </Style>
-                <Style Selector="^:pressed">
-                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
-                    </Style>
-                    <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
-                    </Style>
+
+                <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource MinimizeButtonBackgroundPressed}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MinimizeButtonForegroundPressed}" />
+                </Style>
+
+                <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource MinimizeButtonBackgroundDisabled}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MinimizeButtonForegroundDisabled}" />
                 </Style>
             </Style>
 
             <!--  MaxRestore Button  -->
-            <Style Selector="^.MaxRestore">
-                <Style Selector="^:pointerover">
-                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                        <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
-                    </Style>
-                    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
-                    </Style>
+            <Style Selector="^.maxRestore">
+                <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource MaxRestoreButtonBackgroundPointerOver}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MaxRestoreButtonForegroundPointerOver}" />
                 </Style>
-                <Style Selector="^:pressed">
-                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                        <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
-                    </Style>
-                    <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
-                    </Style>
+
+                <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource MaxRestoreButtonBackgroundPressed}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MaxRestoreButtonForegroundPressed}" />
+                </Style>
+
+                <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource MaxRestoreButtonBackgroundDisabled}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MaxRestoreButtonForegroundDisabled}" />
                 </Style>
             </Style>
 
             <!--  Close Button  -->
-            <Style Selector="^.Close">
-                <Style Selector="^:pointerover">
-                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                        <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
-                    </Style>
-                    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
-                    </Style>
+            <Style Selector="^.close">
+                <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource CloseButtonBackgroundPointerOver}" />
+                    <Setter Property="Foreground" Value="{DynamicResource CloseButtonForegroundPointerOver}" />
                 </Style>
-                <Style Selector="^:pressed">
-                    <Style Selector="^ /template/ Border#PART_LayoutRoot">
-                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
-                    </Style>
-                    <Style Selector="^ ContentPresenter#PART_HeaderPresenter">
-                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
-                    </Style>
+
+                <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource CloseButtonBackgroundPressed}" />
+                    <Setter Property="Foreground" Value="{DynamicResource CloseButtonForegroundPressed}" />
+                </Style>
+
+                <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource CloseButtonBackgroundDisabled}" />
+                    <Setter Property="Foreground" Value="{DynamicResource CloseButtonForegroundDisabled}" />
                 </Style>
             </Style>
         </Style>
@@ -143,13 +155,13 @@
                                 Orientation="Horizontal"
                                 Spacing="4">
                         <Button Name="MinimizeButton"
-                                Classes="FASystemCaption Minimize"
+                                Classes="FASystemCaption minimize"
                                 Content="&#xE921;" />
                         <Button Name="MaxRestoreButton"
-                                Classes="FASystemCaption MaxRestore"
+                                Classes="FASystemCaption maxRestore"
                                 Content="&#xE15B;" />
                         <Button Name="CloseButton"
-                                Classes="FASystemCaption Close"
+                                Classes="FASystemCaption close"
                                 Content="&#xE8BB;" />
                     </StackPanel>
                 </ControlTemplate>
